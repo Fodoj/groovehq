@@ -1,8 +1,10 @@
+require "groovehq/client/connection"
 require "groovehq/client/tickets"
 
 module GrooveHQ
   class Client
     include HTTParty
+    include GrooveHQ::Client::Connection
     include GrooveHQ::Client::Tickets
 
     base_uri "https://api.groovehq.com/v1"

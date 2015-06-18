@@ -3,10 +3,8 @@ module GrooveHQ
 
     module Tickets
 
-      def tickets(options = {})
-        response = self.class.get("/tickets", { query: options })
-
-        response.parsed_response["tickets"]
+      def ticket(ticket_number, options = {})
+        get("/tickets/#{ticket_number}", { query: options })
       end
 
     end
