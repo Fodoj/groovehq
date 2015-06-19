@@ -5,12 +5,16 @@ module GrooveHQ
 
     def initialize(client, data)
       @client = client
-      @data = data
-      @rels = parse_rels
+      @data   = data.with_indifferent_access
+
+      links        = @data.delete(:links)
+      links[:self] = @data.delete(:href) if @data.has_key?(:href)
+
+      @rels = parse_links(links)
     end
 
-    def parse_rels
-      (@data["links"] || {}).each_with_object({}) do |(relation, value), result|
+    def parse_links(links)
+      (links || {}).each_with_object({}) do |(relation, value), result|
         result[relation] = Relation.new(@client, value["href"])
       end
     end
