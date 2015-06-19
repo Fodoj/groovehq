@@ -10,7 +10,7 @@ module GrooveHQ
       links        = @data.delete(:links)
       links[:self] = @data.delete(:href) if @data.has_key?(:href)
 
-      @rels = parse_links(links)
+      @rels = parse_links(links).with_indifferent_access
     end
 
     def parse_links(links)
