@@ -3,8 +3,45 @@ module GrooveHQ
 
     module Tickets
 
-      def ticket(ticket_number, options = {})
-        get("/tickets/#{ticket_number}", { query: options })
+      # FIXME Doesn't work yet, shows only one random folder at the moment
+      def tickets_count(options = {})
+        get("/tickets/count", options)
+      end
+
+      def create_ticket(options)
+        post("/tickets", options)
+      end
+
+      def ticket(ticket_number)
+        get("/tickets/#{ticket_number}")
+      end
+
+      def tickets(options = {})
+        get("/tickets", options)
+      end
+
+      def ticket_state(ticket_number)
+        get("/tickets/#{ticket_number}/state")
+      end
+
+      def update_ticket_state(ticket_number, state)
+        put("/tickets/#{ticket_number}/state", state: state)
+      end
+
+      def ticket_assignee(ticket_number)
+        get("/tickets/#{ticket_number}/assignee")
+      end
+
+      def update_ticket_assignee(ticket_number, assignee)
+        put("/tickets/#{ticket_number}/assignee", assignee: assignee)
+      end
+
+      def update_ticket_priority(ticket_number, priority)
+        put("/tickets/#{ticket_number}/assignee", priority: priority)
+      end
+
+      def update_ticket_assigned_group(ticket_number, assigned_group)
+        put("/tickets/#{ticket_number}/assigned_group", assigned_group: assigned_group)
       end
 
     end

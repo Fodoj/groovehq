@@ -10,7 +10,7 @@ module GrooveHQ
     end
 
     def parse_rels
-      @data["links"].each_with_object({}) do |(relation, value), result|
+      (@data["links"] || {}).each_with_object({}) do |(relation, value), result|
         result[relation] = Relation.new(@client, value["href"])
       end
     end
