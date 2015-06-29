@@ -22,8 +22,8 @@ module GrooveHQ
 
       private
 
-      def request(method, path, options)
-        response = self.class.send(method, path, { query: options })
+      def request(http_method, path, options)
+        response = self.class.send(http_method, path, { query: options })
         data = response.parsed_response
         parse_data(data)
       end
