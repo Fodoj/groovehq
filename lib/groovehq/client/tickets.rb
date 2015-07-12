@@ -3,7 +3,6 @@ module GrooveHQ
 
     module Tickets
 
-      # FIXME Doesn't work yet, shows only one random folder at the moment
       def tickets_count(options = {})
         get("/tickets/count", options)
       end
