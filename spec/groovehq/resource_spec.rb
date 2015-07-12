@@ -8,7 +8,7 @@ describe GrooveHQ::Resource do
 
     it "returns empty data for invalid input" do
       resource = GrooveHQ::Resource.new(self, "")
-      expect(resource.data).to eql({})
+      expect(resource.data.to_h).to eql({})
     end
 
     it "parses data correctly" do
@@ -19,6 +19,13 @@ describe GrooveHQ::Resource do
       expect(resource.data[:name]).to eql "When I am small"
     end
 
+    it "adds getters for data" do
+      data = {
+        name: "When I am small"
+      }
+      resource = GrooveHQ::Resource.new(self, data)
+      expect(resource.name).to eql "When I am small"
+    end
   end
 
   context "#rels" do

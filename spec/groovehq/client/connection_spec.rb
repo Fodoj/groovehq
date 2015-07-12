@@ -70,7 +70,7 @@ describe GrooveHQ::Client::Connection do
     end
 
     it "returns response as it is" do
-      expect(client.get("/tickets/count").data.keys.count).to eql 3
+      expect(client.get("/tickets/count").data.to_h.keys.count).to eql 3
     end
 
   end

@@ -7,10 +7,13 @@ module GrooveHQ
       data = {} unless data.is_a?(Hash)
 
       @client = client
-      @data   = data.with_indifferent_access
 
-      links        = @data.delete(:links) { Hash.new }
-      links[:self] = @data.delete(:href) if @data.has_key?(:href)
+      data = data.with_indifferent_access
+
+      links        = data.delete(:links) { Hash.new }
+      links[:self] = data.delete(:href) if data.has_key?(:href)
+
+      @data   = OpenStruct.new(data.with_indifferent_access)
 
       @rels = parse_links(links).with_indifferent_access
     end
@@ -20,6 +23,15 @@ module GrooveHQ
         result[relation] = Relation.new(@client, value["href"])
       end
     end
+
+    def method_missing(method_sym, *arguments, &block)
+      if @data.respond_to?(method_sym)
+        @data.send(method_sym)
+      else
+        super
+      end
+    end
+
   end
 
 end
