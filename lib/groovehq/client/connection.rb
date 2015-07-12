@@ -40,19 +40,7 @@ module GrooveHQ
 
         case data
         when Hash  then Resource.new(self, data)
-        when Array then Resource.new(self,
-          {
-            collection: data.map { |hash| parse_data({resource: hash}) },
-            meta: original_data["meta"],
-            links: {
-              next: {
-                href: original_data["meta"]["pagination"]["next_page"]
-              },
-              prev: {
-                href: original_data["meta"]["pagination"]["prev_page"]
-              }
-            }
-          })
+        when Array then ResourceCollection.new(self, original_data)
         when nil   then nil
         else data
         end
