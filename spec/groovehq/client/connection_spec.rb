@@ -3,14 +3,28 @@ require 'spec_helper'
 describe GrooveHQ::Client::Connection do
 
   let(:client) { GrooveHQ::Client.new("phantogram") }
+  let(:api_groovehq_url) { "https://api.groovehq.com/v1" }
 
-  it "returns nil for empty response" do
-    stub_request(:get, "https://api.groovehq.com/v1/tickets").to_return(body: "")
-    expect(client.get("/tickets")).to eql(nil)
+  before(:each) do
+    stub_request(:get, "#{api_groovehq_url}#{resource_path}").to_return(body: response)
+  end
+
+  subject { client.get(resource_path) }
+
+  context "empty response" do
+
+    let(:resource_path) { "/tickets" }
+    let(:response) { '' }
+
+    it "returns nil" do
+      expect(subject).to eql(nil)
+    end
+
   end
 
   context "nested hash as response with single root key" do
 
+    let(:resource_path) { "/tickets/1" }
     let(:response) do
       {
         ticket: {
@@ -25,38 +39,32 @@ describe GrooveHQ::Client::Connection do
       }.to_json
     end
 
-    before(:each) do
-      stub_request(:get, "https://api.groovehq.com/v1/tickets/1").to_return(body: response)
-    end
-
     it "returns resource for single root key" do
-      expect(client.get("/tickets/1")).to be_instance_of(GrooveHQ::Resource)
+      expect(subject).to be_instance_of(GrooveHQ::Resource)
     end
 
     it "returns resource with correct relations" do
-      expect(client.get("/tickets/1").rels[:assignee].href).to eql("https://api.groovehq.com/v1/agents/matt@groovehq.com")
+      expect(subject.rels[:assignee].href).to eql("https://api.groovehq.com/v1/agents/matt@groovehq.com")
     end
 
   end
 
   context "single key-value pair in response" do
 
+    let(:resource_path) { "/tickets/1/state" }
     let(:response) do
       { state: "open" }.to_json
     end
 
-    before(:each) do
-      stub_request(:get, "https://api.groovehq.com/v1/tickets/1/state").to_return(body: response)
-    end
-
     it "returns response as it is" do
-      expect(client.get("/tickets/1/state")).to eql "open"
+      expect(subject).to eql "open"
     end
 
   end
 
   context "multiple root key-value pairs in response" do
 
+    let(:resource_path) { "/tickets/count" }
     let(:response) do
       {
         "728525" => 1,
@@ -65,18 +73,15 @@ describe GrooveHQ::Client::Connection do
       }.to_json
     end
 
-    before(:each) do
-      stub_request(:get, "https://api.groovehq.com/v1/tickets/count").to_return(body: response)
-    end
-
     it "returns response as it is" do
-      expect(client.get("/tickets/count").data.to_h.keys.count).to eql 3
+      expect(subject.data.to_h.keys.count).to eql 3
     end
 
   end
 
   context "array of hashes in response" do
 
+    let(:resource_path) { "/tickets" }
     let(:response) do
       {
         tickets: [
@@ -93,16 +98,12 @@ describe GrooveHQ::Client::Connection do
       }.to_json
     end
 
-    before(:each) do
-      stub_request(:get, "https://api.groovehq.com/v1/tickets").to_return(body: response)
-    end
-
     it "builds array of resources from response" do
-      expect(client.get("/tickets").data[:collection].count).to eql 3
+      expect(subject.data[:collection].count).to eql 3
     end
 
     it "returns relations for pagination" do
-      expect(client.get("/tickets").rels[:next]).to be_instance_of(GrooveHQ::Relation)
+      expect(subject.rels[:next]).to be_instance_of(GrooveHQ::Relation)
     end
 
   end
