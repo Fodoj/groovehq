@@ -7,7 +7,7 @@ describe GrooveHQ::Resource do
   context "#data" do
 
     it "returns empty data for invalid input" do
-      resource = GrooveHQ::Resource.new(self, "")
+      resource = GrooveHQ::Resource.new(client, "")
       expect(resource.data.to_h).to eql({})
     end
 
@@ -15,7 +15,7 @@ describe GrooveHQ::Resource do
       data = {
         name: "When I am small"
       }
-      resource = GrooveHQ::Resource.new(self, data)
+      resource = GrooveHQ::Resource.new(client, data)
       expect(resource.data[:name]).to eql "When I am small"
     end
 
@@ -23,7 +23,7 @@ describe GrooveHQ::Resource do
       data = {
         name: "When I am small"
       }
-      resource = GrooveHQ::Resource.new(self, data)
+      resource = GrooveHQ::Resource.new(client, data)
       expect(resource.name).to eql "When I am small"
     end
   end
@@ -38,7 +38,7 @@ describe GrooveHQ::Resource do
           }
         }
       }
-      resource = GrooveHQ::Resource.new(self, data)
+      resource = GrooveHQ::Resource.new(client, data)
       expect(resource.rels[:assignee]).to be_instance_of(GrooveHQ::Relation)
     end
 
@@ -46,7 +46,7 @@ describe GrooveHQ::Resource do
       data = {
         href: "https://api.groovehq.com/v1/agents/matt@groovehq.com"
       }
-      resource = GrooveHQ::Resource.new(self, data)
+      resource = GrooveHQ::Resource.new(client, data)
       expect(resource.rels[:self]).to be_instance_of(GrooveHQ::Relation)
     end
 

@@ -7,7 +7,7 @@ describe GrooveHQ::Resource do
   context "#data" do
 
     it "returns empty data for invalid input" do
-      resource = GrooveHQ::ResourceCollection.new(self, "")
+      resource = GrooveHQ::ResourceCollection.new(client, "")
       expect(resource.count).to eql(0)
     end
 
@@ -15,7 +15,7 @@ describe GrooveHQ::Resource do
       data = {
         tickets: [ { name: "When I am small" } ]
       }
-      resource = GrooveHQ::ResourceCollection.new(self, data)
+      resource = GrooveHQ::ResourceCollection.new(client, data)
       expect(resource.first.name).to eql "When I am small"
     end
 
@@ -35,7 +35,7 @@ describe GrooveHQ::Resource do
           }
         }
       }
-      resource = GrooveHQ::ResourceCollection.new(self, data)
+      resource = GrooveHQ::ResourceCollection.new(client, data)
       expect(resource.rels[:next]).to be_instance_of(GrooveHQ::Relation)
     end
 
