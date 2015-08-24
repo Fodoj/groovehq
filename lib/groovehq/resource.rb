@@ -11,7 +11,7 @@ module GrooveHQ
       data = data.with_indifferent_access
 
       links        = data.delete(:links) { Hash.new }
-      links[:self] = data.delete(:href) if data.has_key?(:href)
+      links[:self] = { href: data.delete(:href) } if data.has_key?(:href)
 
       @data   = OpenStruct.new(data.with_indifferent_access)
 
@@ -20,7 +20,7 @@ module GrooveHQ
 
     def parse_links(links)
       (links || {}).each_with_object({}) do |(relation, value), result|
-        result[relation] = Relation.new(@client, value["href"])
+        result[relation] = Relation.new(@client, value[:href])
       end
     end
 

@@ -40,6 +40,7 @@ describe GrooveHQ::Resource do
       }
       resource = GrooveHQ::Resource.new(client, data)
       expect(resource.rels[:assignee]).to be_instance_of(GrooveHQ::Relation)
+      expect(resource.rels[:assignee].href).to eq("https://api.groovehq.com/v1/agents/matt@groovehq.com")
     end
 
     it "parses self relation correctly" do
@@ -48,6 +49,7 @@ describe GrooveHQ::Resource do
       }
       resource = GrooveHQ::Resource.new(client, data)
       expect(resource.rels[:self]).to be_instance_of(GrooveHQ::Relation)
+      expect(resource.rels[:self].href).to eq("https://api.groovehq.com/v1/agents/matt@groovehq.com")
     end
 
   end
