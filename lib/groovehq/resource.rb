@@ -10,7 +10,7 @@ module GrooveHQ
 
       data = data.with_indifferent_access
 
-      links        = data.delete(:links) { Hash.new }
+      links        = data.delete(:links) { ActiveSupport::HashWithIndifferentAccess.new }
       links[:self] = { href: data.delete(:href) } if data.has_key?(:href)
 
       @data   = OpenStruct.new(data.with_indifferent_access)
