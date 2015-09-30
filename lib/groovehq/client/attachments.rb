@@ -3,8 +3,8 @@ module GrooveHQ
 
     module Attachments
 
-      def attachments(options = {})
-        get("/attachments", options)
+      def attachments(msg_id)
+        get("/attachments?message=#{msg_id}")
       end
 
     end
