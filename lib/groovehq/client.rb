@@ -18,6 +18,7 @@ module GrooveHQ
     include GrooveHQ::Client::Folders
     include GrooveHQ::Client::Groups
     include GrooveHQ::Client::Mailboxes
+    include GrooveHQ::Client::Attachments
     include GrooveHQ::Client::Messages
     include GrooveHQ::Client::Tickets
     include GrooveHQ::Client::Webhooks
