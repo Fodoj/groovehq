@@ -5,6 +5,7 @@ require "groovehq/client/customers"
 require "groovehq/client/folders"
 require "groovehq/client/groups"
 require "groovehq/client/mailboxes"
+require "groovehq/client/attachments"
 require "groovehq/client/messages"
 require "groovehq/client/tickets"
 require "groovehq/client/webhooks"
@@ -18,6 +19,7 @@ module GrooveHQ
     include GrooveHQ::Client::Folders
     include GrooveHQ::Client::Groups
     include GrooveHQ::Client::Mailboxes
+    include GrooveHQ::Client::Attachments
     include GrooveHQ::Client::Messages
     include GrooveHQ::Client::Tickets
     include GrooveHQ::Client::Webhooks
