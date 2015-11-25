@@ -3,8 +3,8 @@ module GrooveHQ
 
     module Customers
 
-      def update_customer(options)
-        post("/tickets/#{ticket_number}/messages", options)
+      def update_customer(email, options)
+        put("/customers/#{email}", options)
       end
 
       def customer(email)
