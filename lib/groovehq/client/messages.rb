@@ -3,7 +3,7 @@ module GrooveHQ
 
     module Messages
 
-      def create_message(options)
+      def create_message(ticket_number, options)
         post("/tickets/#{ticket_number}/messages", options)
       end
 
