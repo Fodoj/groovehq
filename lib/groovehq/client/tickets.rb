@@ -39,8 +39,8 @@ module GrooveHQ
         put("/tickets/#{ticket_number}/priority", priority: priority)
       end
 
-      def update_ticket_assigned_group(ticket_number, assigned_group)
-        put("/tickets/#{ticket_number}/assigned_group", assigned_group: assigned_group)
+      def update_ticket_assigned_group(ticket_number, group)
+        put("/tickets/#{ticket_number}/assigned_group", group: group)
       end
 
     end
