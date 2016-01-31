@@ -20,10 +20,10 @@ module GrooveHQ
       if meta_data.has_key?("pagination")
         links = {
           next: {
-            "href" => meta_data["pagination"]["next_page"]
+            href: meta_data["pagination"]["next_page"]
           },
           prev: {
-            "href" => meta_data["pagination"]["prev_page"]
+            href: meta_data["pagination"]["prev_page"]
           }
         }.with_indifferent_access
       end
