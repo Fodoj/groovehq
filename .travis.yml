@@ -1,6 +1,6 @@
 language: ruby
 cache: bundler
-script: bundle exec rspec spec
+script: bundle exec rspec spec --tag=~integration
 rvm:
   -  2.1.4
 env:
