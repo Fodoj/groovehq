@@ -3,7 +3,7 @@ require 'spec_helper'
 describe GrooveHQ::Client::Customers, integration: true do
 
   let(:client) { GrooveHQ::Client.new }
-  let(:customer_email) { "hello@groovehq.com" }
+  let(:customer_email) { "customer@example.com" }
 
   describe "#update_customer" do
 
@@ -26,7 +26,7 @@ describe GrooveHQ::Client::Customers, integration: true do
     end
 
     it "gets the right customer info" do
-      expect(response.data).to have_attributes(email: customer_email, name: "Lesley Yarbrough")
+      expect(response.data).to have_attributes(email: customer_email, name: "Testcustomer")
     end
 
   end
@@ -40,7 +40,7 @@ describe GrooveHQ::Client::Customers, integration: true do
     end
 
     it "gets the right customers info" do
-      expect(response.first.data).to have_attributes(email: customer_email, name: "Lesley Yarbrough")
+      expect(response.any? { |customer| customer.email == customer_email }).to be true
     end
 
   end
