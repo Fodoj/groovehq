@@ -19,10 +19,9 @@ module GrooveHQ
     end
 
     def parse_links(links)
-      rels = ActiveSupport::HashWithIndifferentAccess.new
-      (links || {}).with_indifferent_access.each_with_object(rels) do |(relation, value), result|
+      (links || {}).each_with_object({}) do |(relation, value), result|
         result[relation] = Relation.new(@client, value[:href])
-      end
+      end.with_indifferent_access
     end
 
     def method_missing(method_sym, *arguments, &block)
