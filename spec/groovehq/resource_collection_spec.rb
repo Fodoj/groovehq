@@ -39,6 +39,7 @@ describe GrooveHQ::Resource do
       resource = GrooveHQ::ResourceCollection.new(client, data)
       expect(resource.rels[:next]).to be_instance_of(GrooveHQ::Relation)
       expect(resource.rels[:next].href).to eq("http://api.groovehq.dev/v1/tickets?page=2")
+      expect(resource.rels[:prev]).to be_nil
     end
 
   end
