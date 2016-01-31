@@ -34,9 +34,11 @@ describe GrooveHQ::Resource do
             next_page: "http://api.groovehq.dev/v1/tickets?page=2"
           }
         }
-      }
+      }.stringify_keys
+
       resource = GrooveHQ::ResourceCollection.new(client, data)
       expect(resource.rels[:next]).to be_instance_of(GrooveHQ::Relation)
+      expect(resource.rels[:next].href).to eq("http://api.groovehq.dev/v1/tickets?page=2")
     end
 
   end

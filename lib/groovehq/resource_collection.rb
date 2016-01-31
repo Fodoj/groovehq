@@ -25,7 +25,7 @@ module GrooveHQ
           prev: {
             "href" => meta_data["pagination"]["prev_page"]
           }
-        }
+        }.with_indifferent_access
       end
 
       @data = OpenStruct.new(meta: meta_data, collection: collection)

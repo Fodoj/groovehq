@@ -19,7 +19,7 @@ module GrooveHQ
     end
 
     def parse_links(links)
-      (links || {}).each_with_object({}) do |(relation, value), result|
+      (links || {}).with_indifferent_access.each_with_object({}) do |(relation, value), result|
         result[relation] = Relation.new(@client, value[:href])
       end
     end
