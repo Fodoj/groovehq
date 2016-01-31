@@ -15,13 +15,13 @@ module GrooveHQ
 
       @data   = OpenStruct.new(data.with_indifferent_access)
 
-      @rels = parse_links(links).with_indifferent_access
+      @rels = parse_links(links)
     end
 
     def parse_links(links)
       (links || {}).each_with_object({}) do |(relation, value), result|
         result[relation] = Relation.new(@client, value[:href])
-      end
+      end.with_indifferent_access
     end
 
     def method_missing(method_sym, *arguments, &block)
