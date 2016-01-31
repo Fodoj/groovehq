@@ -29,7 +29,7 @@ module GrooveHQ
       end
 
       @data = OpenStruct.new(meta: meta_data, collection: collection)
-      @rels = parse_links(links).with_indifferent_access
+      @rels = parse_links(links)
     end
 
     def each(&block)
