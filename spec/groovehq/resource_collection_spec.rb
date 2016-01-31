@@ -43,4 +43,18 @@ describe GrooveHQ::Resource do
 
   end
 
+  context "#each" do
+
+    it "returns an enumerator when block omitted" do
+      data = {
+        tickets: [ { name: "When I am small" } ]
+      }
+
+      resource = GrooveHQ::ResourceCollection.new(client, data)
+      expect(resource.each).to be_instance_of(Enumerator)
+      expect(resource.each.first.name).to eql "When I am small"
+    end
+
+  end
+
 end

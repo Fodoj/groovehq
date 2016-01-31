@@ -33,6 +33,8 @@ module GrooveHQ
     end
 
     def each(&block)
+      return enum_for(:each) unless block_given?
+
       collection.each { |item| yield item }
     end
 
