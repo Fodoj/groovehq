@@ -3,7 +3,7 @@ require 'spec_helper'
 describe GrooveHQ::Client::Agents, integration: true do
 
   let(:client) { GrooveHQ::Client.new }
-  let(:email) { "honestua@gmail.com" }
+  let(:email) { "fodojyko@gmail.com" }
 
   describe "#agent" do
 
@@ -14,7 +14,7 @@ describe GrooveHQ::Client::Agents, integration: true do
     end
 
     it "gets the right agent info" do
-      expect(response.data).to have_attributes(email: email, first_name: "Andrey")
+      expect(response.data).to have_attributes(email: email, first_name: "Testagent")
     end
 
   end
@@ -28,7 +28,7 @@ describe GrooveHQ::Client::Agents, integration: true do
     end
 
     it "gets the right agents info" do
-      expect(response.first.data).to have_attributes(email: email, first_name: "Andrey")
+      expect(response.first.data).to have_attributes(email: email, first_name: "Testagent")
     end
 
   end
