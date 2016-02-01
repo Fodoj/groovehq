@@ -25,17 +25,20 @@ module GrooveHQ
           prev: {
             href: meta_data["pagination"]["prev_page"]
           }
-        }.with_indifferent_access
+        }
       end
 
       @data = OpenStruct.new(meta: meta_data, collection: collection)
       @rels = parse_links(links)
     end
 
-    def each(&block)
+    def each
       return enum_for(:each) unless block_given?
 
       collection.each { |item| yield item }
+
+      rel = @rels[:next] or return self
+      rel.get.each(&Proc.new)
     end
 
   end

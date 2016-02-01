@@ -56,6 +56,32 @@ describe GrooveHQ::Resource do
       expect(resource.each.first.name).to eql "When I am small"
     end
 
+    it "enumerates all pages" do
+      first_page = {
+        tickets: [{ title: "Ticket 1" }, { title: "Ticket 2" }],
+        meta: {
+          pagination: {
+            next_page: "http://api.groovehq.dev/v1/tickets?page=2"
+          }
+        }
+      }.stringify_keys
+
+      next_page = {
+        tickets: [{ title: "Ticket 3"}],
+        meta: {}
+      }.stringify_keys
+
+      stub_request(:get, "http://api.groovehq.dev/v1/tickets?page=2").
+        with(:headers => {'Authorization'=>'Bearer phantogram'}).
+        to_return(:body => next_page.to_json, status: 200)
+
+      resource = GrooveHQ::ResourceCollection.new(client, first_page)
+
+      all_tickets = resource.each.to_a
+      expect(all_tickets.size).to eql(3)
+
+      expect(all_tickets.map(&:title)).to eql(["Ticket 1", "Ticket 2", "Ticket 3"])
+    end
   end
 
 end
