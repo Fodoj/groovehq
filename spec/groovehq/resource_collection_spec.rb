@@ -113,6 +113,15 @@ describe GrooveHQ::Resource do
         expect(resource.collection.size).to eql(3)
         expect(resource.collection.map(&:title)).to eql(["Ticket 1", "Ticket 2", "Ticket 3"])
       end
+
+      it "respects :per_page and other parameters except :page" do
+        resource = GrooveHQ::ResourceCollection.new(client, @page_1, page: 1, per_page: 20, foo: "bar")
+        stub_request(:get, "http://api.groovehq.dev/v1/tickets?page=2&per_page=20&foo=bar").
+          with(:headers => {'Authorization'=>'Bearer phantogram'}).
+          to_return(:body => {tickets: []}.to_json, status: 200)
+
+        expect(resource.each.to_a.size).to eql(1)
+      end
     end
 
   end
