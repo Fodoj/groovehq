@@ -56,32 +56,65 @@ describe GrooveHQ::Resource do
       expect(resource.each.first.name).to eql "When I am small"
     end
 
-    it "enumerates all pages" do
-      first_page = {
-        tickets: [{ title: "Ticket 1" }, { title: "Ticket 2" }],
-        meta: {
-          pagination: {
-            next_page: "http://api.groovehq.dev/v1/tickets?page=2"
+    context "paginated requests" do
+
+      before do
+        page_1 = {
+          tickets: [{ title: "Ticket 1" }],
+          meta: {
+            pagination: {
+              next_page: "http://api.groovehq.dev/v1/tickets?page=2"
+            }
           }
-        }
-      }.stringify_keys
+        }.stringify_keys
 
-      next_page = {
-        tickets: [{ title: "Ticket 3"}],
-        meta: {}
-      }.stringify_keys
+        page_2 = {
+          tickets: [{ title: "Ticket 2"}],
+          meta: {
+            pagination: {
+              prev_page: "http://api.groovehq.dev/v1/tickets?page=1",
+              next_page: "http://api.groovehq.dev/v1/tickets?page=3"
+            }
+          }
+        }.stringify_keys
 
-      stub_request(:get, "http://api.groovehq.dev/v1/tickets?page=2").
-        with(:headers => {'Authorization'=>'Bearer phantogram'}).
-        to_return(:body => next_page.to_json, status: 200)
+        page_3 = {
+          tickets: [{ title: "Ticket 3"}],
+          meta: {
+            pagination: {
+              prev_page: "http://api.groovehq.dev/v1/tickets?page=2",
+            }
+          }
+        }.stringify_keys
 
-      resource = GrooveHQ::ResourceCollection.new(client, first_page)
+        stub_request(:get, "http://api.groovehq.dev/v1/tickets?page=2").
+          with(:headers => {'Authorization'=>'Bearer phantogram'}).
+          to_return(:body => page_2.to_json, status: 200)
 
-      all_tickets = resource.each.to_a
-      expect(all_tickets.size).to eql(3)
+        stub_request(:get, "http://api.groovehq.dev/v1/tickets?page=3").
+          with(:headers => {'Authorization'=>'Bearer phantogram'}).
+          to_return(:body => page_3.to_json, status: 200)
 
-      expect(all_tickets.map(&:title)).to eql(["Ticket 1", "Ticket 2", "Ticket 3"])
+        @page_1 = page_1
+      end
+
+      it "enumerates all pages" do
+        resource = GrooveHQ::ResourceCollection.new(client, @page_1)
+
+        all_tickets = resource.each.to_a
+        expect(all_tickets.size).to eql(3)
+        expect(all_tickets.map(&:title)).to eql(["Ticket 1", "Ticket 2", "Ticket 3"])
+      end
+
+      it "merges data" do
+        resource = GrooveHQ::ResourceCollection.new(client, @page_1)
+        resource.each.to_a
+
+        expect(resource.collection.size).to eql(3)
+        expect(resource.collection.map(&:title)).to eql(["Ticket 1", "Ticket 2", "Ticket 3"])
+      end
     end
+
   end
 
 end

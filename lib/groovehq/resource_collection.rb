@@ -38,7 +38,11 @@ module GrooveHQ
       collection.each { |item| yield item }
 
       rel = @rels[:next] or return self
-      rel.get.each(&Proc.new)
+      coll = rel.get
+      coll.each(&Proc.new)
+
+      @data = OpenStruct.new(meta: coll.meta, collection: collection + coll.collection)
+      @rels = coll.rels
     end
 
   end
