@@ -108,10 +108,9 @@ describe GrooveHQ::Resource do
 
       it "merges data" do
         resource = GrooveHQ::ResourceCollection.new(client, @page_1)
-        resource.each.to_a
 
+        expect(resource.map(&:title)).to eql(["Ticket 1", "Ticket 2", "Ticket 3"])
         expect(resource.collection.size).to eql(3)
-        expect(resource.collection.map(&:title)).to eql(["Ticket 1", "Ticket 2", "Ticket 3"])
       end
 
       it "respects :per_page and other parameters except :page" do
@@ -120,7 +119,7 @@ describe GrooveHQ::Resource do
           with(:headers => {'Authorization'=>'Bearer phantogram'}).
           to_return(:body => {tickets: []}.to_json, status: 200)
 
-        expect(resource.each.to_a.size).to eql(1)
+        expect(resource.map(&:title)).to eql(["Ticket 1"])
       end
     end
 
