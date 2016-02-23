@@ -41,11 +41,12 @@ module GrooveHQ
       collection.each { |item| yield item }
 
       rel = @rels[:next] or return self
-      coll = rel.get(@options.except(:page))
-      coll.each(&Proc.new)
+      resource_collection = rel.get(@options.except(:page))
+      resource_collection.each(&Proc.new)
 
-      @data = OpenStruct.new(meta: coll.meta, collection: collection + coll.collection)
-      @rels = coll.rels
+      @data = OpenStruct.new(meta: resource_collection.meta,
+                             collection: collection + resource_collection.collection)
+      @rels = resource_collection.rels
     end
 
   end
