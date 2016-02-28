@@ -106,6 +106,16 @@ describe GrooveHQ::Client::Connection do
       expect(subject.rels[:next]).to be_instance_of(GrooveHQ::Relation)
     end
 
+    context "with request options" do
+      subject { client.get(resource_path, per_page: 20) }
+
+      it "retains options" do
+        stub_request(:get, "#{api_groovehq_url}#{resource_path}?per_page=20").to_return(body: response)
+        expect(subject.options).to eq({})
+      end
+
+    end
+
   end
 
 end
