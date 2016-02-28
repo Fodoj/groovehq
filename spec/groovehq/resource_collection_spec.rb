@@ -53,7 +53,7 @@ describe GrooveHQ::Resource do
 
       resource = GrooveHQ::ResourceCollection.new(client, data)
       expect(resource.each).to be_instance_of(Enumerator)
-      expect(resource.each.first.name).to eql "When I am small"
+      expect(resource.first.name).to eql "When I am small"
     end
 
     context "paginated requests" do
@@ -88,12 +88,12 @@ describe GrooveHQ::Resource do
         }.stringify_keys
 
         stub_request(:get, "http://api.groovehq.dev/v1/tickets?page=2").
-          with(:headers => {'Authorization'=>'Bearer phantogram'}).
-          to_return(:body => page_2.to_json, status: 200)
+          with(headers: {'Authorization' => 'Bearer phantogram'}).
+          to_return(body: page_2.to_json, status: 200)
 
         stub_request(:get, "http://api.groovehq.dev/v1/tickets?page=3").
-          with(:headers => {'Authorization'=>'Bearer phantogram'}).
-          to_return(:body => page_3.to_json, status: 200)
+          with(headers: {'Authorization' => 'Bearer phantogram'}).
+          to_return(body: page_3.to_json, status: 200)
 
         @page_1 = page_1
       end
@@ -116,8 +116,8 @@ describe GrooveHQ::Resource do
       it "respects :per_page and other parameters except :page" do
         resource = GrooveHQ::ResourceCollection.new(client, @page_1, page: 1, per_page: 20, foo: "bar")
         stub_request(:get, "http://api.groovehq.dev/v1/tickets?page=2&per_page=20&foo=bar").
-          with(:headers => {'Authorization'=>'Bearer phantogram'}).
-          to_return(:body => {tickets: []}.to_json, status: 200)
+          with(headers: {'Authorization' => 'Bearer phantogram'}).
+          to_return(body: {tickets: []}.to_json, status: 200)
 
         expect(resource.map(&:title)).to eql(["Ticket 1"])
       end
