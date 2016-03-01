@@ -25,6 +25,25 @@ describe GrooveHQ::Client::Tickets, integration: true do
       expect(response.summary).to eq options[:body]
     end
 
+      it "successfully can include customer details in ticket" do
+      customer_hash = {
+        email: "customer@example.com",
+        about: "Your internal reference",
+        company_name: "SomeCompany Pty Ltd"
+      }
+
+      options = {
+        body: "Some body text",
+        from: "fodojyko@gmail.com",
+        to: customer_hash
+      }
+      response = client.create_ticket(options)
+      customer = response.rels['customer'].get
+      expect(customer.company_name).to eq customer_hash[:company_name]
+      expect(customer.email).to eq customer_hash[:email]
+      expect(customer.about).to eq customer_hash[:about]
+    end
+
   end
 
   describe "#ticket" do
