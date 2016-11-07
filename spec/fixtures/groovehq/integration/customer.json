@@ -1,0 +1,21 @@
+{
+  "customer": {
+    "href": "https://api.groovehq.com/v1/customers/j.smith@gmail.com",
+    "links": {
+      "tickets": {
+        "href": "https://api.groovehq.com/v1/tickets?customer=j.smith@gmail.com"
+      }
+    },
+    "email": "customer@example.com",
+    "name": "John Smith",
+    "about": "Your internal reference",
+    "twitter_username": null,
+    "title": null,
+    "company_name": "SomeCompany Pty Ltd",
+    "phone_number": null,
+    "location": null,
+    "website_url": null,
+    "linkedin_username": null,
+    "custom": { }
+  }
+}

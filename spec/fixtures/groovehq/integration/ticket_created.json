@@ -1,0 +1,20 @@
+{
+    "ticket": {
+        "number": 1,
+        "href": "https://api.groovehq.com/v1/tickets/1",
+        "links": {
+            "assignee": {
+                "href": "https://api.groovehq.com/v1/agents/matt@groovehq.com"
+            },
+            "customer": {
+                "href": "https://api.groovehq.com/v1/customers/customer@somewhere.com"
+            },
+            "state": {
+                "href": "https://api.groovehq.com/v1/tickets/1/state"
+            },
+            "messages": {
+                "href": "https://api.groovehq.com/v1/tickets/1/messages"
+            }
+        }
+    }
+}

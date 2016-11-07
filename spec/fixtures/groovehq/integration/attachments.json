@@ -1,0 +1,7 @@
+{
+  "attachments": [{
+    "filename": "an-attachment.pdf",
+    "size": 100249,
+    "url": "http://bucket-name.s3.amazonaws.com/?1429889868"
+  }]
+}

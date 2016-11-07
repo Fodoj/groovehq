@@ -1,0 +1,12 @@
+{
+  "mailboxes": [{
+    "id": 1324123,
+    "name": "Inbox",
+    "email": "support@mywebsite.com",
+    "links": {
+      "folders": {
+        "href": "https://api.groovehq.com/v1/folders?mailbox=1324123"
+      }
+    }
+  }]
+}
