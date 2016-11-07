@@ -1,0 +1,32 @@
+{
+  "customers": [
+    {
+      "href": "https://api.groovehq.com/v1/customers/customer@example.com",
+      "links": {
+      "tickets": {
+        "href":
+          "https://api.groovehq.com/v1/tickets?customer=customer@example.com"
+        }
+      },
+      "email": "customer@example.com",
+      "name": "John Smith",
+      "about": null,
+      "twitter_username": null,
+      "title": null,
+      "company_name": null,
+      "phone_number": null,
+      "location": null,
+      "website_url": null,
+      "linkedin_username": null,
+      "custom": { }
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "current_page": 1,
+      "total_pages": 23,
+      "total_count": 23,
+      "next_page": "http://api.groovehq.dev/v1/customers?page=2"
+    }
+  }
+}

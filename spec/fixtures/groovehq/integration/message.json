@@ -1,0 +1,20 @@
+{
+  "message": {
+    "created_at": "2012-07-17T13:41:01Z",
+    "updated_at": "2012-07-17T13:41:01Z",
+    "note": false,
+    "body": "Some body text",
+    "plain_text_body": "Some body text",
+    "links": {
+      "author": {
+        "href": "https://api.groovehq.com/v1/customers/customer@somewhere.com"
+      },
+      "recipient": {
+        "href": "https://api.groovehq.com/v1/agents/matt@groovehq.com"
+      },
+      "ticket": {
+        "href": "https://api.groovehq.com/v1/tickets/1"
+      }
+    }
+  }
+}

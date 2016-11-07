@@ -1,0 +1,33 @@
+{
+    "ticket": {
+        "assigned_group": "test_group",
+        "created_at": "2012-07-17T13:41:01Z",
+        "number": 1,
+        "priority": "high",
+        "resolution_time": null,
+        "title": "Hello",
+        "updated_at":"2012-07-17T13:41:01Z",
+        "href": "https://api.groovehq.com/v1/tickets/1",
+        "closed_by": "matt@groovehq.com",
+        "tags": ["important"],
+        "message_count": 1,
+        "summary": "This is the first 100 characters of the first message...",
+        "links": {
+            "assignee": {
+                "href": "https://api.groovehq.com/v1/agents/matt@groovehq.com"
+            },
+            "customer": {
+                "href": "https://api.groovehq.com/v1/customers/customer@somewhere.com",
+                "email": "customer@example.com",
+                "about": "Your internal reference",
+                "company_name": "SomeCompany Pty Ltd"
+            },
+            "state": {
+                "href": "https://api.groovehq.com/v1/tickets/1/state"
+            },
+            "messages": {
+                "href": "https://api.groovehq.com/v1/tickets/1/messages"
+            }
+        }
+    }
+}

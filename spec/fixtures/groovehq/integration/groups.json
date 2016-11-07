@@ -1,0 +1,11 @@
+{
+  "groups": [{
+    "id": "1234442341",
+    "name": "Founders",
+    "links": {
+      "agents": {
+        "href": "http://api.groovehq.com/v1/agents?group=1234442341"
+      }
+    }
+  }]
+}

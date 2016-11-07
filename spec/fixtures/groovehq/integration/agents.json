@@ -1,0 +1,13 @@
+{
+  "agents": [{
+    "email": "matt@groovehq.com",
+    "first_name": "Matthew",
+    "last_name": "Beedle",
+    "href": "https://api.groovehq.com/v1/agents/matt@groovehq.com",
+    "links": {
+      "tickets": {
+        "href": "https://api.groovehq.com/v1/tickets?assignee=matt%40groovehq.com"
+      }
+    }
+  }]
+}

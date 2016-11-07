@@ -1,0 +1,13 @@
+{
+  "agent": {
+    "email": "fodojko@gmail.com",
+    "first_name": "Testagent",
+    "last_name": "Agent",
+    "href": "https://api.groovehq.com/v1/agents/fodojko@gmail.com",
+    "links": {
+      "tickets": {
+        "href": "https://api.groovehq.com/v1/tickets?assignee=fodojko%40gmail.com"
+      }
+    }
+  }
+}

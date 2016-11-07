@@ -1,0 +1,21 @@
+{
+  "customer": {
+    "href": "https://api.groovehq.com/v1/customers/customer@example.com",
+    "links": {
+      "tickets": {
+        "href": "https://api.groovehq.com/v1/tickets?customer=customer@example.com"
+      }
+    },
+    "email": "customer@example.com",
+    "name": "John Smith",
+    "about": "Some new about text",
+    "twitter_username": null,
+    "title": null,
+    "company_name": null,
+    "phone_number": null,
+    "location": null,
+    "website_url": null,
+    "linkedin_username": null,
+    "custom": { }
+  }
+}
