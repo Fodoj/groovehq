@@ -16,14 +16,14 @@ describe GrooveHQ::Client::Messages, integration: true do
 
   describe "#message" do
 
-    let(:response) { client.message('25662284') }
+    let(:response) { client.message('4840987280') }
 
     it "successfully gets message" do
       expect(response.data).to have_attributes(created_at: String)
     end
 
     it "gets the right message info" do
-      expect(response.body).to include("Hi Andrey,")
+      expect(response.body).to include("Hi Oleksandr,")
     end
 
   end
@@ -37,7 +37,7 @@ describe GrooveHQ::Client::Messages, integration: true do
     end
 
     it "gets the right messages info" do
-      expect(response.first.body).to include("Whatsup")
+      expect(response.first.body).to include("Some body text")
     end
 
   end
