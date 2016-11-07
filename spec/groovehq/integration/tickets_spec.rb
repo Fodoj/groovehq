@@ -48,7 +48,7 @@ describe GrooveHQ::Client::Tickets, integration: true do
 
   describe "#ticket" do
 
-    let(:response) { client.ticket('11') }
+    let(:response) { client.ticket('9') }
 
     it "successfully gets ticket" do
       expect(response.data).to have_attributes(created_at: String, number: Fixnum)

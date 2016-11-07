@@ -8,11 +8,11 @@ describe GrooveHQ::Client::Customers, integration: true do
   describe "#update_customer" do
 
     it "updates customer info" do
-      customer = client.customer(customer_email)
       new_about_text = "Some new about text"
       response = client.update_customer(customer_email, about: new_about_text)
+      customer = client.customer(customer_email)
       expect(customer.about).to eq new_about_text
-      expect(response.rels[:tickets].href).to eq "http://api.groovehq.com/v1/tickets?customer=#{customer.id}"
+      expect(URI.unescape(response.rels[:tickets].href)).to eq "http://api.groovehq.com/v1/tickets?customer=#{customer.email}"
     end
 
   end
