@@ -5,6 +5,8 @@ require "groovehq/relation"
 require "groovehq/resource"
 require "groovehq/resource_collection"
 require "groovehq/client"
+require 'dotenv'
+Dotenv.load
 
 module GrooveHQ
   # Your code goes here...
