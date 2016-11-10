@@ -16,7 +16,7 @@ describe GrooveHQ::Client::Messages, integration: true do
 
   describe "#message" do
 
-    let(:response) { client.message('25662284') }
+    let(:response) { client.message('5850909715') }
 
     it "successfully gets message" do
       expect(response.data).to have_attributes(created_at: String)
