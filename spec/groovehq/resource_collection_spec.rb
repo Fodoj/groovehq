@@ -63,7 +63,10 @@ describe GrooveHQ::Resource do
           tickets: [{ title: "Ticket 1" }],
           meta: {
             pagination: {
-              next_page: "http://api.groovehq.dev/v1/tickets?page=2"
+              next_page: "http://api.groovehq.dev/v1/tickets?page=2",
+              current_page: 1,
+              total_pages: 3,
+              total_count: 3
             }
           }
         }.stringify_keys
@@ -73,7 +76,10 @@ describe GrooveHQ::Resource do
           meta: {
             pagination: {
               prev_page: "http://api.groovehq.dev/v1/tickets?page=1",
-              next_page: "http://api.groovehq.dev/v1/tickets?page=3"
+              next_page: "http://api.groovehq.dev/v1/tickets?page=3",
+              current_page: 2,
+              total_pages: 3,
+              total_count: 3
             }
           }
         }.stringify_keys
@@ -82,10 +88,18 @@ describe GrooveHQ::Resource do
           tickets: [{ title: "Ticket 3"}],
           meta: {
             pagination: {
+              next_page: "http://api.groovehq.dev/v1/tickets",
               prev_page: "http://api.groovehq.dev/v1/tickets?page=2",
+              current_page: 3,
+              total_pages: 3,
+              total_count: 3
             }
           }
         }.stringify_keys
+
+        stub_request(:get, "http://api.groovehq.dev/v1/tickets").
+          with(headers: {'Authorization' => 'Bearer phantogram'}).
+          to_return(body: page_1.to_json, status: 200)
 
         stub_request(:get, "http://api.groovehq.dev/v1/tickets?page=2").
           with(headers: {'Authorization' => 'Bearer phantogram'}).
