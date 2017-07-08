@@ -20,13 +20,15 @@ module GrooveHQ
       links = {}
 
       if meta_data.has_key?("pagination")
+        @total_pages = meta_data["pagination"]["total_pages"]
+        @current_page = meta_data["pagination"]["current_page"]
         links = {
           next: {
             href: meta_data["pagination"]["next_page"]
           },
           prev: {
             href: meta_data["pagination"]["prev_page"]
-          }
+          },
         }
       end
 
@@ -39,6 +41,8 @@ module GrooveHQ
       return enum_for(:each) unless block_given?
 
       collection.each { |item| yield item }
+
+      return self if @current_page == @total_pages
 
       rel = @rels[:next] or return self
       resource_collection = rel.get(@options.except(:page))
