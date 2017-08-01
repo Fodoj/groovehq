@@ -28,7 +28,7 @@ client.tickets(page: 2).rels[:next].get.first.rels[:customer].get.email
 
 #### List of all methods
 
-Client methods really just map 1 to 1 to API, see all of them beyond. Check API docs for list of available `options`.
+Client methods really just map 1 to 1 to API, see all of them beyond. Check [the API docs](https://www.groovehq.com/docs) for list of available `options`.
 
 ```ruby
 agent(email)
